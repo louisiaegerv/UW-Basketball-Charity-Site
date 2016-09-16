@@ -9,3 +9,5 @@ Technology and Features:
 - Site implements APIs for PayPal payment processing
 - Responsive and UX-driven
 - Custom graphics made with Pixlr (free Photoshop)
+
+![Alt text](https://raw.githubusercontent.com/louisiaegerv/UW-Basketball-Charity-Site/master/img/bballSite.jpg "UW Basketball Tournament Site")
