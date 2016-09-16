@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html ng-app="mad" >
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Adriana Contreras, Alejandro Menocal" name="author">
+    <title>UW 5K</title>
+	<link rel="icon" type="image/ico" href="img/RunUnited5KLogo1-Icon.jpg">
+	<link href="css/Junk%20CSS/bootstrap.min.css" rel="stylesheet">
+	<link href="css/Junk%20CSS/agency.css" rel="stylesheet">
+	<link href="css/Junk%20CSS/style.css" rel="stylesheet">
+	<script src="js/modernizr.js"></script>
+
+</head>
+<body>
+
+<!-- ////////////////////////////////////////////////////////this section if for navbar//////////////////////////////////////////////-->
+<header id="home">
+	<nav class="navbar navbar-fixed-top">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>                        
+		  </button>
+		  <a class="navbar-brand logo" href="#home">Logo<!--<img src="img/Run5k_Short.png" class="headerBrand">--></a>
+		  <!-- Can insert more logos here -->
+		
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+		  <ul class="nav navbar-nav navbar-right">
+            <!--Modify Nav Bar sections here--> 
+		    <li><a href="#details">Section 1</a></li>
+			<li><a href="#register">Section 2</a></li>
+			<li><a href="#FAQ">Section 3</a></li>
+			<li class="sponsors"><a href="#sponsors">Sponsors</a></li>
+		  </ul>
+		</div>
+	  </div>
+	</nav> 
+</header>
+
+<!-- ////////////////////////////////////////////////////////this section if for home page//////////////////////////////////////////////-->
+<div class="home-page">
+	
+	<div class="home-screen center-block">
+		
+		<div class="text-center energy-picture">
+			<img src="img/Run5k_Long.png" />
+		</div>
+		<div class="text-center pad-top">
+			<h1>Smaller Text</h1>
+			<a class="apply-button" href="#register">Large Button</a>
+
+		</div>
+	</div>
+	
+	
+</div>
+
+<!--////////////////////////////////////////////////////////this section if for Event Details//////////////////////////////////////////////-->
+<div id="details" class="event-details">
+	<h1>Section 1 Details</h1>
+    <p><span class="red-text">What:</span></p>
+	<p><span class="red-text">Who:</span></p> 
+	<p><span class="red-text">Where:</span></p>
+	<p><span class="red-text">When:</span></p>
+	<p><span class="red-text">Cost:</span></p>
+	
+</div>
+<!-- ////////////////////////////////////////////////////////this section if for registration//////////////////////////////////////////////-->
+<div id="register" class="attend-page" ng-controller="RegisterController">
+	
+	<h1>Section 2</h1>
+	
+	<div class="container container-nom">
+		<div class="row">
+			<div class="col-sm12 col-md-6 col-lg-8 form-text" >
+				<form ng-hide="showme">
+					<div class="form-group">
+						
+                        <!-- Email -->
+						<label for="ParticipantEmail">Email Input:</label>
+                        <!-- ng-model is the variable that will show in the controller-->
+						<input type="email" class="form-control" name="ParticipantEmail" ng-model="applyForm.Email" id="emailApplicant" placeholder="john.doe@exxonmobil.com or john.doe@gmail.com" required>
+                        <!-- Error Checking  -->
+						<div ng-show="noEmail" class="alert alert-warning" role="alert">
+							<a href="#" class="alert-link">Please enter Email</a>
+						</div>
+						
+
+						<!-- Text -->
+						<label for="ParticipantName">Text Input:</label>
+						<input type="text" class="form-control" name="ParticipantName" ng-model="applyForm.XOMEmployee" id="NameApplicant" placeholder="John Doe" required>                        
+                        <!-- Error Checking  -->
+						<div ng-show="noName" class="alert alert-warning" role="alert">
+							<a href="#" class="alert-link">Please enter Text</a>
+						</div>
+						
+						
+						
+						<!-- Radio Button -->
+						<label for="ParticipantCampusAccess">Radio Button Input:</label> &nbsp;
+						<input type="radio" name="campusAccess" id="campusAccess" ng-model="selectedCampusAccess" value="Yes">&nbsp;Yes &nbsp;
+						<input type="radio" name="campusAccess" id="campusAccess" ng-model="selectedCampusAccess" value= "No">&nbsp;No
+						<div ng-show="noCampus" class="alert alert-warning" role="alert">
+							<a href="#" class="alert-link">Please select option</a>
+						</div>
+						
+						
+						
+						<!-- Radio Button with Conditional Text Input -->
+						<label for="mileage">Radio Button with Conditional Text Input </label>
+						<input type="radio" name="mileage" id="walking" value="Yes" ng-model="applyForm.mileage">&nbsp;Yes &nbsp;
+						<input type="radio" name="mileage" id="running" value="No" ng-model="applyForm.mileage">&nbsp;No
+
+                        <!-- Error Checking  -->
+                        <div ng-show="noMileage" class="alert alert-warning" role="alert">
+							<a href="#" class="alert-link">Please select option</a>
+						</div>
+			
+						<!-- Conditional Text Input -->
+						<div ng-show="applyForm.mileage=='Yes'">Conditional Text Input: 
+						<input type="text" style="width:100px;" class="form-control" name="pace" id="pace" ng-model="applyForm.pace" placeholder="12:00"></div>				
+						
+					
+						<!-- Drop Down with List from Controller-->
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" id="shirtSize" data-toggle="dropdown" arias-haspopup="true" aria-expanded="true">
+							{{selectedShirtSize}}<span class="caret"></span></button>
+							<ul class="dropdown-menu" aria-labeledby="dropdownMenu1">
+								<li ng-repeat="sizes in tShirtSizes" ><a value="{{size}}" ng-click="dropdownParticipant(sizes)">{{sizes.size}}</a></li>
+                            </ul>
+						</div>
+                        <!-- Error Checking  -->
+                        <div ng-show="noShirt" class="alert alert-warning" role="alert">
+							<a href="#" class="alert-link">Please Select Drop Down list Item</a>
+						</div>
+						<hr style="border-color: black">
+					</div>
+				</form>
+					
+				<!-- Hidden Form that shows with button click-->
+				<form ng-hide="showme">
+					<!--Participant 1 -->
+					<div class="form-group" id="Participant1" style="display:none">
+						
+						<!--Text Input-->
+						<label for="Participant1">Text Input:</label>
+						<input type="text" class="form-control" name="Participant1" ng-model="applyForm.Participant1" id="NameParticipant1" placeholder="John Doe">
+						<div ng-show="noParticipant1" class="alert alert-warning" role="alert">
+							<a href="#" class="alert-link">Please enter text</a>
+						</div>
+						
+						
+						<!-- Radio Button with Conditional Text Input -->
+						<label for="mileage">Radio Button Input:</label>
+						<input type="radio" name="mileage1" id="walking" value="Yes" ng-model="applyForm.mileage1" >&nbsp;Yes &nbsp;
+						<input type="radio" name="mileage1" id="running"  value="No" ng-model="applyForm.mileage1"> &nbsp;No 
+						<div ng-show="noP1mileage" class="alert alert-warning" role="alert">
+							<a href="#" class="alert-link">Please select option</a>
+						</div>
+						<div ng-show="applyForm.mileage1=='Yes'"> Conditional Text Input
+						
+                        <!-- Drop Down with List from Controller-->
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" id="shirtSize" data-toggle="dropdown" arias-haspopup="true" aria-expanded="true">
+							{{selectedShirtSize1}}<span class="caret"></span></button>
+							<ul class="dropdown-menu" aria-labeledby="dropdownMenu1">
+								<li ng-repeat="sizes in tShirtSizes" ><a value="{{size}}" ng-click="dropdownParticipant1(sizes)">{{sizes.size}}</a></li>
+							</ul>
+						</div>
+                        <div ng-show="noP1tshirt" class="alert alert-warning" role="alert">
+							<a href="#" class="alert-link">Please enter if TShirt Size</a>
+						</div>
+						<hr style="border-color: black">
+					   </div>
+                    </div>
+					
+					<!-- Add From Button -->
+					<div class="col-md-8 input-group ">
+						<button type="button" id="addParticipant" ng-hide="guestCount == 5" class="btn btn-default btn-md" ng-click="showDiv('Participant');">
+							<span class="glyphicon glyphicon-plus" aria-hidden="false"></span> Add Form
+						</button>
+					</div>
+					<!--Remove Form Btn-->
+					<button type="button" id="removeParticipant" ng-show="guestCount >= 1" class="btn btn-default btn-md" ng-click="hideDiv('Participant')">
+							<span class="glyphicon glyphicon-minus" aria-hidden="false"></span> Remove Form
+						</button>
+                    
+                    <!--Overview Form-->
+					<div class="form-group">
+						<label for="SubTotal">Read-only Text:</label> <!-- onload="sum()"-->
+						<input type="number" style="width:100px;" class="form-control" name="SubTotal" ng-model="subTotal" id="SubTotal"   placeholder="" readonly>
+						
+						<label for="AddContribution">Input Text with Tooltip:</label>
+						
+						<input type="number" style="width:100px;" class="form-control" name="AddContribution" ng-model="contribution" id="AddContribution" placeholder="" ng-change="CalcTotal();" data-toggle="tooltip" title="Cool tooltip" min="0" step="1">
+						
+                        <!--Conditional Totals from Controller-->
+						<label ng-show="earlyBird==true" for="Total">Total: $ {{totalAmt}} (After 10% Early Bird Discount)</label> 
+						<label ng-hide="earlyBird==true" for="Total">Total: $ {{totalAmt}} </label> 
+						<!--<input type="number" style="width:100px;"class="form-control" name="Total" ng-model="sum();" id="Total" placeholder="" readonly>-->
+					</div>
+					
+					<!--Submit Apply Button with Text from Controller-->
+                    <!--Will Scroll to top of div-->
+					<button class="submit-apply" ng-click="validateInput(); scrollToTop();" href="#register">{{btnText}}</button>
+				</form>
+				
+				
+				<div id="paypalDiv" ng-show="showme">
+				    <hr style="border-color: black">
+					<h4>Summary
+									<label ng-show="earlyBird==true && adultCounter > 0 ">{{adultCounter}} Option 1 @ $36</label>
+									<label ng-show="earlyBird==false && adultCounter > 0 ">{{adultCounter}} Option 1 @ $40</label>
+									<label ng-show="earlyBird==true && childCounter > 0">{{childCounter}} Option 2 @ $27</label>
+									<label ng-show="earlyBird==false && childCounter > 0">{{childCounter}} Option 2 @ $30</label>
+									<label ng-show="contribution > 0">${{contribution}} Additional Input </label>
+									<label >Total Counter {{totalAmt}}</label>
+					<script src="js/paypal-button.min.js?merchant=Caitlin.S.Blackburn@exxonmobil.com" data-button="buynow" data-name="UW5K" data-amount="{{totalAmt}}"  async></script>
+					<hr style="border-color: black">
+                    </h4>
+				</div>					
+            </div>
+		</div>
+	</div>
+</div>
+
+<!-- ////////////////////////////////////////////////////////this section if for FAQS//////////////////////////////////////////////-->
+<div ng-hide="showme" class="faq-page" id="FAQ">
+	<h1>Section 3</h1>
+	
+		<div class="container col-sm-12 col-lg-8 faq-font">
+            
+            <p><span class="red-text">Question 1</span>
+            Answer.
+            </p>
+	</div>
+</div>    
+<div class="sponsors" id="sponsors">
+    <h1>Add Sponser Logos here</h1>
+        <!--<a href="#home"><img src="img/UWEM2016logo.jpg" class="headerBrand"></a>-->
+</div>
+
+</body>
+
+	<!-- load angular -->
+    <script src="js/jquery-min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/vivus.min.js"></script>
+    <script src="js/jquery.smooth-scroll.js"></script>
+	<script src="js/angular/angular.min.js"></script>
+	<script src="js/angular/registerController.js"></script>
+    <script src="js/angular/controller.js"></script>
+	<script src="js/angular/app.js"></script>
+	<script src="js/paypal-button.min.js"></script>
+    
+	
+	<script>
+		$('#payModal').modal({
+            backdrop: 'static',
+            keyboard: false
+    })
+	</script>
+	
+	
+	 <script>
+	 
+		$(document).ready(function() {
+
+		  $('ul.nav a').smoothScroll({offset: -100});
+		  $('.apply-button').smoothScroll({offset: -100});
+		  $('.navbar-brand').smoothScroll();
+		
+		  $('#first').fadeIn("slow");
+		  $('.secondline').fadeIn();
+		  
+		  //hide Modal
+		  $('#payModal').modal('hide');
+		  
+		  $('[data-toggle="tooltip"]').tooltip(); 
+
+		});
+	
+
+	</script>
+
+</html>

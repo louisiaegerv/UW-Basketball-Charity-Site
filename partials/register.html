@@ -1,0 +1,127 @@
+<div class="container">
+    <div id="registerContainer">
+        <div class="row responsive-text">
+            <h1>United Way Basketball Tournament Sign Up</h1>
+            <p>Please fill out the following form to register for the United Way Basketball Tournament</p>
+        </div>
+        <form>
+            <div class="row responsive-text">
+                <!-- Text -->
+                <h3 name="name" for="ParticipantName">Name</h3>
+                <input type="text" class="form-control" name="ParticipantName" ng-model="form.name" id="NameApplicant" placeholder="John Doe" required>
+
+                <!-- Error Checking  -->
+                <div ng-show="noName" class="alert alert-warning" role="alert">
+                    <a href="#" class="alert-link">Please enter Name</a>
+                </div>
+            </div>
+            <div class="row responsive-text">
+                <!-- Email -->
+                <h3 for="ParticipantEmail">Email</h3>
+                <!-- ng-model is the variable that will show in the controller-->
+                <input type="email" class="form-control" name="ParticipantEmail" ng-model="form.email" id="emailApplicant" placeholder="john.doe@exxonmobil.com" required>
+
+                <!-- Error Checking  -->
+                <div ng-show="noEmail" class="alert alert-warning" role="alert">
+                    <a href="#" class="alert-link">Please enter Email</a>
+                </div>
+                <br/>
+            </div>
+            <div class="row responsive-text">            
+                <h3>Please select the events you would like to register for</h3>
+            </div>
+            <div class="row responsive-text">
+                <input type="checkbox" id="tournament" ng-model="form.tournament" value="tournament" ng-change="form.tournament;updateTotal()">&nbsp;Tournament &nbsp;</input>
+                <input type="checkbox" id="extra" ng-model="form.extra" value="extra" ng-change="form.extra;updateTotal()">&nbsp;3 Point Contest or Knockout &nbsp;</input>
+            </div>
+            <div class="row responsive-text" ng-show="form.extra">
+                <h5>Please select which contest you would like to participate in</h5>
+                <input type="radio" id="three" ng-model="form.three" value="three">&nbsp;3 Point Contest &nbsp;
+                <input type="radio" id="three" ng-model="form.three" value="knockout">&nbsp;Knockout
+            </div>
+            <div ng-show="form.tournament">
+                <div class="row responsive-text">
+                    <!-- Team or free agent -->
+                    <h3 for="mileage">Registering with/as </h3>
+                    <input type="radio" id="team" value="team" ng-change="clearFreeAgent()" ng-model="form.category">&nbsp;Team &nbsp;
+                    <input type="radio" id="freeAgent" value="free" ng-change="clearTeam()" ng-model="form.category">&nbsp;Free Agent
+
+                    <!-- Error Checking  -->
+                    <div ng-show="noCategory" class="alert alert-warning" role="alert">
+                        <a href="#" class="alert-link">Please select option</a>
+                    </div>
+                </div>
+                <!-- Team Options -->
+                <div class="row responsive-text" ng-show="form.category=='team'">
+                    <!-- Gender -->
+                    <div class="col s12 m2">Team Name</div>
+                    <div class="col s12 m3">
+                        <input type="text" class="form-control" name="teamName" ng-model="form.team">
+                    </div>
+                </div>
+                <!-- Free agent options -->
+                <div class="row responsive-text" ng-show="form.category=='free'">
+                    <!-- Gender -->
+                    <div class="col s2 m2">Gender</div>
+                    <div class="col s12 m3">
+                        <input type="text" class="form-control" name="gender" ng-model="form.gender">
+                    </div>
+                </div>
+                <div class="row responsive-text" ng-show="form.category=='free'">
+                    <!-- Height -->
+                    <div class="col s12 m2">Height</div>
+                    <div class="col s12 m3">
+                        <input type="text" class="form-control" name="height" ng-model="form.height">
+                    </div>
+                </div>
+                <br/>
+                <div class="row responsive-text" ng-show="form.category=='free'">
+                    <!-- Position -->
+                    <h3>I'd best describe myself as a</h3>
+                    <input type="radio" id="position" ng-model="form.position" value="ptGuard">&nbsp;Point Guard &nbsp;
+                    <input type="radio" id="position" ng-model="form.position" value="shtGuard">&nbsp;Shooting Guard &nbsp;
+                    <input type="radio" id="position" ng-model="form.position" value="forward">&nbsp;Power Forward &nbsp;
+                    <input type="radio" id="position" ng-model="form.position" value="post">&nbsp;Post &nbsp;
+                    <input type="radio" id="position" ng-model="form.position" value="defender">&nbsp;Great Defender
+                </div>
+            </div>
+            <div class="row responsive-text ">
+                <!-- Team or free agent -->
+                <h3>Would you be interested in purchasing a box lunch on the day of the event?</h3>
+                <input type="radio" id="lunch" value="yes" ng-model="form.lunch">&nbsp;Yes &nbsp;
+                <input type="radio" id="lunch" value="no" ng-model="form.lunch">&nbsp;No
+
+                <!-- Error Checking  -->
+                <div ng-show="noLunch" class="alert alert-warning" role="alert">
+                    <a href="#" class="alert-link">Please select option</a>
+                </div>
+                <div  ng-show="form.lunch=='yes'">
+                    <h5>Please order your lunch <a class="lunchLink" href="https://www.surveymonkey.com/r/BWZDRF3">here</a>.</h5>
+                </div>
+            </div>            
+        </form>
+        <div class="row responsive-text ">
+            <h2>Registration Fee: ${{total}}</h2>            
+            <script src="js/paypal-button.min.js?merchant=bamcdan73@gmail.com" data-button="buynow" data-name="UWBasketballTournament" data-amount="{{total}}" data-currency="USD" data-return="https://ishareteam1.na.xom.com/sites/hunitedway/UWBasketball/site/index.html#/done" async></script>
+        </div>
+        <div class="row responsive-text ">
+            <br/>
+            <p>Once your payment is complete, finalize your registration by entering your paypal confirmation number and clicking below:</p>
+            <br/>
+            <!-- Confirmation Number -->
+            <div class="col s12 m3">Transaction ID</div>
+            <div class="col s12 m6">
+                <input type="text" class="form-control" name="confirmation" ng-model="form.confirmation" required>
+            
+                <!-- Error Checking  -->
+                <div ng-show="noConfirmation" class="alert alert-warning" role="alert">
+                    <a href="#" class="alert-link">Please enter Paypal Transaction ID</a>
+                </div>
+            </div>
+        </div>
+        <div class="row responsive-text">
+            <button class="btn-primary" ng-click="validateInput()" href="#register">Register</button>
+        </div>
+        <br/>
+    </div>
+</div>
