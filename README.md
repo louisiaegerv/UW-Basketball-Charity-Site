@@ -13,4 +13,4 @@ Technology and Features:
 ======
 [Click here](https://louisiaegerv.github.io/UW-Basketball-Charity-Site/) to view a demo of the site.
 ------
-[<img src="https://raw.githubusercontent.com/louisiaegerv/UW-Basketball-Charity-Site/master/img/bballSite.jpg">](https://louisiaegerv.github.io/UW-Basketball-Charity-Site/)
+[<img src="https://raw.githubusercontent.com/louisiaegerv/Project-Images/master/bballSite.jpg">](https://louisiaegerv.github.io/UW-Basketball-Charity-Site/)
